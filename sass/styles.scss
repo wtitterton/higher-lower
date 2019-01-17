@@ -1,0 +1,409 @@
+
+$btn-color:#B4252A;
+
+@font-face {
+    font-family: exoReg;
+    src: url(../fonts/exo/Exo-Thin.otf);
+}
+
+@font-face
+{
+	font-family:exoMedium;
+	src: url(../fonts/exo/Exo-Medium.otf);
+}
+
+
+
+html,body
+{
+	margin:0;
+	padding:0;
+	height:100%;
+	overflow:hidden;
+	background:url(../imgs/bg.png);
+	font-family:exoReg;
+	
+}
+
+.btns-con
+{
+	margin: 30px auto;
+	text-align:center;
+}
+
+
+.gameControls
+{
+	
+	margin:10px auto;
+	width:100%;
+	max-width:500px;
+	position:relative;
+}
+
+
+
+.guess-btn,.validate-btn
+{
+	
+	display:inline-block;
+	line-height:140px;
+	vertical-align:top;
+	font-size:90px;
+	width:32%;
+
+	&.guess-btn
+	{
+		position:relative;
+		opacity:0;
+		transform:rotate(-360deg);
+		transition:left .8s, transform .8s, opacity .8s;
+	}
+
+	&.guess-btn:first-child
+	{
+		left:33%;
+	}
+
+	&.guess-btn:last-child
+	{
+		position:relative;
+		left:-33%;
+	}
+
+	&.guess-btn.show
+	{
+		opacity:1;
+		left:0;
+		transform-origin:50% 50%;
+		transform:rotate(360deg);
+		transition:left .8s .2s, transform .8s .2s, opacity .8s .2s;
+	}
+	
+	& img
+	{
+		width:100%;
+		max-width:140px;
+		box-shadow:0px 10px 10px rgba(0,0,0,.6), 0px 0px 20px #000 ;
+		border-radius:50%;
+
+		&:hover
+		{
+			cursor:pointer;
+		}
+	}
+
+	&:first-child img 
+	{
+		float:right;
+	}
+
+	&:last-child img
+	{
+		float:left;
+	}
+}
+
+.validate-btn
+{
+	background:#C4282C;
+	border:2px solid whitesmoke;
+	box-shadow:0px 0px 3px #eff2fa, 0px 8px 30px 5px rgba(0,0,0,.9); 
+	color:#fff;
+	text-shadow:0px 0px 7px #000;
+	border-radius:30%;
+	position:relative;
+	z-index:20;
+}
+
+.validate-btn.small
+{
+	transform:scale(0.6);
+	transition:all .8s 1s;
+
+}
+
+
+
+
+.btn 
+{
+   	width:100px;
+   	text-transform:uppercase;
+   	color:#fff; 
+   	font-size:23px;
+   	padding:10px;
+   	display:inline-block;
+   	border-color:$btn-color;
+	border-top:3px solid $btn-color;
+	border-bottom:3px solid $btn-color;
+	letter-spacing:4px;
+	position:relative;
+	transition:border-color .3s, color .3s;
+
+	&:before
+	{
+		content:'';
+		position:absolute;
+		top:0;
+		left:0;
+		background:rgba(180,37,42,.5);
+		width:0%;
+		height:100%;
+		transition:width .3s;
+	}
+
+	&:hover
+	{
+		font-family:exoMedium;
+		border:transparent;
+		color:#F64E34;
+		text-shadow: 1px -1px 0px #000;
+	}
+
+	&:hover:before
+	{
+		width:100%;
+	}
+
+	&:first-child
+	{
+		margin-right:50px;
+	}
+  }
+
+
+
+.btn:hover
+{
+	cursor:pointer;
+}
+
+
+.cardHolder
+{
+	margin:0px auto;
+	margin-top:10%;
+	min-height:280px;
+	width:100%;
+	max-width:500px;
+	transform:translateX(-70px);
+	text-align:center;
+	box-shadow:none;
+
+}
+
+
+
+
+
+$numcards: 30;
+$card_width:200px;
+$card_height: 2 * $card_width;
+
+$center: ($numcards / 2) * $card_width;
+
+.cardHolder.anim
+{
+	& .card
+	{
+
+
+	@for $i from 1 through $numcards 
+     {
+	      &:nth-child(#{$i})
+	      {
+	        $angle: ((90 / $numcards) * ($i - 1)) - 45;
+	        -webkit-transform: rotateZ(#{$angle}deg);
+	        -moz-transform: rotateZ(#{$angle}deg);
+	        -ms-transform: rotateZ(#{$angle}deg);
+	            -o-transform: rotateZ(#{$angle}deg);
+	            transform: rotateZ(#{$angle}deg);
+	            transition:all .8s cubic-bezier(.26,0,.66,.67);
+	       }
+      }
+	}
+}
+
+.cardHolder .card
+{
+	transform:none;
+	transition:all .8s cubic-bezier(.26,0,.66,.67);
+}
+
+
+.card
+{
+	width:$card_width;
+	
+	height:card_height;
+	display:inline-block;
+	padding:0;
+	position:absolute;
+	left:50% - 6.333333%;
+	 -webkit-transform-origin:50% 100% ;
+    -moz-transform-origin:50% 100% ;
+    -ms-transform-origin:50% 100% ;
+    -o-transform-origin:50% 100%;
+    transform-origin:50% 100%;
+ }
+
+
+.inplay
+{
+	width:100%;
+	max-width:300px;
+	height:400px;
+	box-shadow:0px 40px 40px -35px rgba(0,0,0,.9);
+}
+
+.middleCard
+{
+	z-index:99;
+}
+
+.score
+{
+	margin:0;
+	position:fixed;
+	top:20px;
+	right:20px;
+	text-transform:uppercase;
+	padding:5px;
+	color:#fff;
+	border-top:3px double #525061;
+	border-bottom:3px double #525061;
+}
+
+.gameOverScreen
+{
+	text-align:center;
+	margin:0 auto;
+	color:#fff;
+	position:relative;
+	top:50%;
+	transform:translateY(-50%);
+
+	& img
+	{
+		width:300px;
+	}
+
+	& h4
+	{
+		font-size:20px;
+		text-transform:uppercase;
+	}
+
+	& .indicator
+	{
+		color:#000;
+	}
+
+	& p
+	{
+		font-size:25px;
+	}
+
+	& h6
+	{
+		width:100%;
+		max-width:200px;
+		margin:10px 0 0 0;
+	}
+}
+
+.overlay
+{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	min-height:100%;
+	z-index:99;
+	background:rgba(0,0,0,.9);
+	color:#fff;
+	overflow-y: auto !important;
+
+	& div
+	{
+		margin:0 auto;
+		margin-top:100px;
+		text-align:center;
+	}
+
+	& img
+	{
+		margin:80px 0px;
+		animation: arrowMove 1s infinite ease-in;
+
+		&:hover
+		{
+			cursor:pointer;
+		}
+
+	}
+
+	& p
+	{
+		width:90%;
+		max-width:500px;
+		margin:0 auto;
+	}
+}
+
+@keyframes arrowMove
+{
+	0%,50%,100%
+	{
+		transform:translateX(0);
+	}
+	25%
+	{
+		transform:translateX(10px);
+	}
+	
+	75%
+	{
+		transform:translateX(-5px);
+	}
+}
+
+@media screen and (max-width:680px){
+	.score
+	{
+		position:static;
+		text-align:center;
+		width:200px;
+		margin:20px auto;
+	}
+}
+
+
+@media screen and (max-width:500px){
+	html,body, .overlay
+	{
+		overflow-y: auto;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
